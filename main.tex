@@ -1,0 +1,209 @@
+%% ============================================================
+%%  TEMPLATE LAPORAN PRAKTIKUM - IF25-21008 JARINGAN KOMPUTER
+%%  Teknik Informatika - Institut Teknologi Sumatera (ITERA)
+%%  Kompilasi: pdfLaTeX (2x agar nomor halaman/daftar benar)
+%% ============================================================
+\documentclass[12pt]{article}
+
+% ---------- Ukuran kertas (B5 = 176 x 250 mm, sama dengan Word) ----------
+\usepackage[paperwidth=176mm,paperheight=250mm,
+            left=25.4mm,right=25.4mm,top=24mm,bottom=24mm,
+            headheight=14pt,headsep=8mm,footskip=10mm]{geometry}
+
+% ---------- Bahasa & font ----------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+% Opsional (jika tersedia, mis. di Overleaf): \usepackage[indonesian]{babel}
+\usepackage{mathpazo}                 % serif (Palatino) untuk isi dokumen
+\usepackage[scaled=0.92]{helvet}      % sans (Arial-like) untuk judul/kotak
+\usepackage{microtype}
+
+% ---------- Paket pendukung ----------
+\usepackage{graphicx}
+\usepackage[table,dvipsnames]{xcolor}
+\usepackage{tikz}
+\usepackage[most]{tcolorbox}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{caption}
+\usepackage{array}
+\usepackage{amssymb}
+\usepackage{ragged2e}
+\usepackage{float}
+
+% ---------- Warna ----------
+\definecolor{abuabu}{HTML}{D9D9D9}    % kotak judul sampul
+\definecolor{abugelap}{HTML}{808080}
+\definecolor{tabhead}{HTML}{4F81BD}   % header tabel
+\definecolor{tabband}{HTML}{DBE5F1}   % baris selang-seling
+\definecolor{tabline}{HTML}{95B3D7}   % garis tabel
+
+% ---------- Data yang dapat diisi ----------
+\input{data/identitas}
+\input{data/kelas}
+\input{data/asisten}
+\input{data/anggota-kelompok}
+\input{data/laporan}
+
+% ---------- Paragraf & spasi (1,5 spasi, rata kiri-kanan) ----------
+\linespread{1.4}\selectfont
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\emergencystretch}{3em}
+
+% ---------- Header & footer ----------
+\newcommand{\headtext}{%
+  \sffamily\fontsize{7}{8}\selectfont\textls[300]{LAPORAN PRAKTIKUM}\hfill
+  {\fontsize{8}{9}\selectfont Teknik Informatika ITERA}}
+
+\fancypagestyle{halamandua}{%  header garis tipis (halaman judul dalam)
+  \fancyhf{}
+  \fancyhfoffset[HL,HR]{13mm}
+  \fancyhead[C]{\headtext}
+  \renewcommand{\headrulewidth}{0.5pt}
+  \fancyfoot[R]{\sffamily\bfseries\fontsize{8}{9}\selectfont\thepage}
+  \renewcommand{\footrulewidth}{0.5pt}
+}
+\fancypagestyle{isi}{%         header garis tebal (halaman isi)
+  \fancyhf{}
+  \fancyhfoffset[HL,HR]{13mm}
+  \fancyhead[C]{\headtext}
+  \renewcommand{\headrulewidth}{3pt}
+  \fancyfoot[R]{\sffamily\bfseries\fontsize{8}{9}\selectfont\thepage}
+  \renewcommand{\footrulewidth}{0.5pt}
+}
+\pagestyle{isi}
+
+% ---------- Judul bagian ----------
+\titleformat{\section}[block]
+  {\centering\bfseries\fontsize{20}{24}\selectfont}{}{0pt}{}
+\titlespacing*{\section}{0pt}{14pt}{6pt}
+\titleformat{\subsection}[block]
+  {\bfseries\fontsize{14}{14}\selectfont\raggedright}{}{0pt}{}
+\titlespacing*{\subsection}{0pt}{4pt}{0pt}
+\titleformat{\subsubsection}[block]
+  {\centering\bfseries\fontsize{16}{20}\selectfont}{}{0pt}{}
+\titlespacing*{\subsubsection}{0pt}{12pt}{4pt}
+% Referensi: abu-abu, sans
+\newcommand{\judulreferensi}[1]{%
+  \par\addvspace{10pt}%
+  {\sffamily\color{abugelap}\fontsize{14}{18}\selectfont #1}\par\vspace{8pt}}
+
+% ---------- Daftar (bullet & sub-bullet) ----------
+\setlist[itemize,1]{label=\textbullet,leftmargin=12.4mm,labelsep=6mm,labelwidth=0pt,
+                    align=left,itemsep=0pt,topsep=0pt,parsep=0pt,partopsep=0pt}
+\setlist[itemize,2]{label=\texttt{o},leftmargin=12.4mm,labelsep=6mm,labelwidth=0pt,
+                    align=left,itemsep=0pt,topsep=0pt,parsep=0pt,partopsep=0pt}
+
+% ---------- Caption (gambar & tabel) ----------
+\captionsetup{font={scriptsize},labelsep=period,justification=centering,
+              skip=3pt}
+\renewcommand{\figurename}{Gambar}
+\renewcommand{\tablename}{Tabel}
+
+% ---------- Kotak rangkuman ----------
+\newtcolorbox{rangkuman}{enhanced,sharp corners,colback=white,colframe=black,
+  boxrule=0.8pt,left=4mm,right=4mm,top=3mm,bottom=2mm,
+  fontupper=\sffamily\small}
+\newcommand{\titik}{\makebox[90mm]{\dotfill}}
+
+% ---------- Pengaturan tabel ----------
+\renewcommand{\arraystretch}{1.0}
+\newcommand{\thead}[1]{\textcolor{white}{\textbf{\fontsize{7}{8}\selectfont #1}}}
+
+% Tampilkan pengganti yang rapi jika aset gambar opsional belum tersedia.
+\newcommand{\gambarpengganti}[1]{%
+  \IfFileExists{#1}{\includegraphics[width=95mm]{#1}}{%
+    \begin{tikzpicture}
+      \node[draw=abugelap,text=abugelap,minimum width=95mm,
+            minimum height=50mm,align=center,font=\sffamily\small]
+            {Gambar dokumentasi\\belum tersedia};
+    \end{tikzpicture}}}
+
+\begin{document}
+\pagenumbering{arabic}\setcounter{page}{0}
+
+%% ==================================================================
+%%  HALAMAN SAMPUL (halaman 0)
+%% ==================================================================
+\thispagestyle{empty}
+{\linespread{1}\selectfont\begin{tikzpicture}[remember picture,overlay,
+    shift={(current page.north west)},x=0.354mm,y=-0.354mm]
+  % teks kiri atas
+  \node[anchor=north west,inner sep=0] at (48,42) {\fontsize{9}{10}\selectfont Laporan Praktikum};
+  % kotak "Pertemuan"
+  \fill[abuabu] (371,47) rectangle (437,126);
+  \node[anchor=north,inner sep=0,text=white] at (404,52)
+        {\sffamily\fontsize{7}{8}\selectfont\textcolor{black!45}{Pertemuan}};
+  \node[anchor=north,inner sep=0,text=white] at (404,70)
+        {\sffamily\fontsize{40}{44}\selectfont\pertemuan};
+  % kode mata kuliah + garis
+  \node[anchor=north west,inner sep=0] at (48,141)
+        {\fontsize{9}{10}\selectfont IF25-21008: JARINGAN KOMPUTER};
+  \draw[line width=0.5pt] (47,158) -- (437,158);
+  \node[anchor=north west,inner sep=0] at (48,162)
+        {\fontsize{14}{16}\selectfont Laporan Praktikum/Lab};
+  % banner judul
+  \fill[abuabu!70] (17,232) rectangle (469,327);
+  \node[anchor=center,inner sep=0,align=center] at (243,280)
+        {\sffamily\bfseries\fontsize{19}{22}\selectfont\judul};
+  % identitas (rata kanan)
+  \node[anchor=north east,inner sep=0,align=right,font=\bfseries\fontsize{11}{16}\selectfont] at (438,368)
+        {\namapeserta\\ \kelas\\ \nim};
+  \node[anchor=north east,inner sep=0,align=right,font=\bfseries\fontsize{11}{16}\selectfont] at (438,434)
+        {\underline{Tim Asisten}\\ \asistenA\\ \asistenB};
+  % institusi
+  \node[anchor=north east,inner sep=0,align=right,font=\bfseries\fontsize{11}{16}\selectfont] at (438,537)
+        {Teknik Informatika\\ Fakultas Teknologi Industri\\
+         Institut Teknologi Sumatera\\ \bulantahun};
+  % logo institusi
+  \node[anchor=north west,inner sep=0] at (25,575)
+        {\includegraphics[width=340\unitlength]{aset/gambar/logotera.png}};
+  % garis bawah
+  \draw[line width=0.5pt] (47,676) -- (437,676);
+\end{tikzpicture}}
+\newpage
+
+%% ==================================================================
+%%  HALAMAN JUDUL DALAM (halaman 1)
+%% ==================================================================
+\thispagestyle{halamandua}
+{\linespread{1}\selectfont\begin{tikzpicture}[remember picture,overlay,
+    shift={(current page.north west)},x=0.354mm,y=-0.354mm]
+  \node[anchor=north,inner sep=0,align=center,text=abugelap,font=\sffamily\fontsize{8.5}{14}\selectfont] at (243,68)
+    {\textls[250]{FAKULTAS TEKNOLOGI INDUSTRI}\\ \textls[250]{ITERA 2026}};
+  \node[anchor=north,inner sep=0,text=abugelap!85] at (243,128)
+    {\sffamily\fontsize{20}{24}\selectfont\judul};
+  \draw[abugelap,line width=0.4pt] (70,174) -- (415,174);
+  % anggota kelompok
+  \node[anchor=north,inner sep=0,align=center,font=\bfseries\fontsize{9}{11.3}\selectfont] at (243,312)
+    {Nama anggota kelompok:\\\daftaranggota};
+  \node[anchor=north,inner sep=0,align=center,font=\bfseries\fontsize{9}{11.3}\selectfont] at (243,434)
+    {\catatananggota};
+  % alamat institusi
+  \node[anchor=north,inner sep=0,align=center,font=\fontsize{9}{11.3}\selectfont] at (243,466)
+    {ITERA Laboratory\\ Program Studi Teknik Informatika\\
+     Fakultas Teknologi Industri\\ Institut Teknologi Sumatera};
+  \node[anchor=north,inner sep=0,align=center,font=\fontsize{9}{11.3}\selectfont] at (243,520)
+    {Jl. Terusan Ryacudu, Desa Way Hui, Kecamatan Jati Agung,\\
+     Lampung Selatan -- Lampung 35365\\
+     Telp. +62-721-8030188; 8030189};
+  \node[anchor=north,inner sep=0] at (243,568)
+    {\bfseries\fontsize{14}{17}\selectfont\judul};
+\end{tikzpicture}}
+\newpage
+
+%% ==================================================================
+%%  ISI LAPORAN (halaman 2 dst.)
+%% ==================================================================
+\pagestyle{isi}
+
+% Setiap bagian laporan disimpan terpisah agar mudah diisi.
+\input{isi/rangkuman}
+\input{isi/dokumentasi}
+\input{isi/alat-dan-bahan}
+\input{isi/tugas}
+\input{isi/referensi}
+
+\end{document}
