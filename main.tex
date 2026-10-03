@@ -77,7 +77,9 @@
   \fancyhf{}
   \fancyhfoffset[HL,HR]{13mm}
   \fancyhead[C]{\makebox[\textwidth][s]{\headtext}}
-  \renewcommand{\headrulewidth}{0.5pt}
+  \renewcommand{\headrulewidth}{3pt}
+  \renewcommand{\headrule}{\hbox to\headwidth{\vbox{\hrule width\headwidth height 3pt
+    \vskip 1pt\hrule width\headwidth height 0.75pt}}\vskip -4.75pt}
   \fancyfoot[C]{\makebox[\textwidth][r]{\arialblack\fontsize{8}{9}\selectfont\thepage}}
   \renewcommand{\footrulewidth}{0.5pt}
 }
@@ -166,17 +168,19 @@
   \node[anchor=center,inner sep=0,align=center] at (249,280)
         {\bernard\bfseries\fontsize{24}{28}\selectfont\judul};
   % identitas (rata kanan, Word: Garamond 14pt Bold)
-  \node[anchor=north east,inner sep=0,align=right,font=\bfseries\fontsize{14}{17}\selectfont] at (444,368)
+  \node[anchor=north east,inner sep=0,align=right,font=\bfseries\fontsize{14}{17}\selectfont] at (450,368)
         {\namapeserta\\ \kelas\\ \nim};
-  \node[anchor=north east,inner sep=0,align=right,font=\bfseries\fontsize{14}{17}\selectfont] at (444,434)
+  \node[anchor=north east,inner sep=0,align=right,font=\bfseries\fontsize{14}{17}\selectfont] at (450,434)
         {\underline{Tim Asisten}\\ \asistenA\\ \asistenB};
   % institusi (Word: Garamond 14pt Bold)
-  \node[anchor=north east,inner sep=0,align=right,font=\bfseries\fontsize{14}{17}\selectfont] at (444,537)
+  \node[anchor=north east,inner sep=0,align=right,font=\bfseries\fontsize{14}{17}\selectfont] at (450,537)
         {Teknik Informatika\\ Fakultas Teknologi Industri\\
          Institut Teknologi Sumatera\\ \bulantahun};
-  % logo institusi
-  \node[anchor=north west,inner sep=0] at (31,575)
-        {\includegraphics[width=340\unitlength]{aset/gambar/logotera.png}};
+  % logo institusi (tiga logo, rata bawah)
+  \node[anchor=north west,inner sep=0] at (42,581)
+        {\includegraphics[width=60pt]{aset/gambar/logo-itera.png}\hspace{18.4pt}%
+         \includegraphics[width=118.2pt]{aset/gambar/logo-fti.png}\hspace{21.4pt}%
+         \includegraphics[width=159.8pt]{aset/gambar/logo-if.png}};
 \end{tikzpicture}}
 \newpage
 
@@ -186,11 +190,11 @@
 \thispagestyle{halamandua}
 {\linespread{1}\selectfont\begin{tikzpicture}[remember picture,overlay,
     shift={(current page.north west)},x=0.354mm,y=-0.354mm]
-  \node[anchor=north,inner sep=0,align=center,text=abugelap!70,font=\fontsize{8}{16}\selectfont\addfontfeatures{LetterSpace=40}] at (249,140)
+  \node[anchor=north,inner sep=0,align=center,text=abugelap!60,font=\fontsize{9.5}{17}\selectfont\addfontfeatures{LetterSpace=15}] at (249,140)
     {FAKULTAS TEKNOLOGI INDUSTRI\\ ITERA 2026};
-  \node[anchor=north,inner sep=0,text=abugelap] at (249,200)
-    {\arialblack\fontsize{20}{24}\selectfont\judul};
-  \draw[abugelap,line width=0.4pt] (66,242) -- (431,242);
+  \node[anchor=north,inner sep=0,text=abugelap!85] at (249,203)
+    {\arialblack\fontsize{27}{31}\selectfont\addfontfeatures{LetterSpace=-3}\judul};
+  \draw[abugelap,line width=0.6pt] (70,242) -- (428,242);
   % anggota kelompok (Word ReturnAddress: Garamond 10pt Bold)
   \node[anchor=north,inner sep=0,align=center,font=\bfseries\fontsize{10}{12}\selectfont] at (249,375)
     {Nama anggota kelompok:\\\daftaranggota};
