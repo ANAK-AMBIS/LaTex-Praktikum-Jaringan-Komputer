@@ -51,7 +51,9 @@ Semua data laporan dipisah ke folder `data/`, jadi `main.tex` tidak perlu disent
 
 Isi laporan ditulis di folder `isi/`: rangkuman, langkah-langkah dokumentasi, alat dan bahan, tugas, serta referensi.
 
-> **Tips:** daftar anggota tumbuh ke atas, sehingga alamat ITERA di halaman judul dalam tetap di posisinya berapa pun jumlah anggota. Untuk tugas individu, kosongkan `\catatananggota` agar catatannya tidak tampil.
+> **Tips:** daftar anggota tumbuh ke atas, sehingga alamat ITERA di halaman judul dalam tetap di posisinya berapa pun jumlah anggota. Untuk laporan individu, kosongkan `\daftaranggota` agar seluruh blok anggota tidak tampil, atau kosongkan `\catatananggota` saja untuk menyembunyikan catatannya.
+>
+> Judul panjang boleh dipecah dengan `\\` di `\judul`. Font sampul tetap konsisten di setiap baris, dan garis di halaman judul dalam ikut turun mengikuti baris terakhir.
 
 ## Kompilasi
 
@@ -118,4 +120,5 @@ miktex-fc-list | Select-String "Garamond|Arial Black|Bernard|Cambria"
 ## Catatan
 
 - Gambar dokumentasi memakai perintah `\gambarpengganti`. Jika berkas gambarnya belum ada, yang tampil adalah kotak bertuliskan "Gambar dokumentasi belum tersedia", sehingga kompilasi tidak gagal.
+- Helper opsional: `\gbr{nama-file}{caption}` menyisipkan `aset/gambar/<nama-file>.png` beserta caption, dan `\topik{judul}` membuat subjudul tebal kecil di dalam langkah.
 - Pada `isi/dokumentasi/langkah-2.tex` ada `\newpage` agar langkah kedua dimulai di halaman baru seperti di template Word. Hapus baris itu jika tidak diperlukan.

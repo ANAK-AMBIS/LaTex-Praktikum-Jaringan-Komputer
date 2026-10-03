@@ -151,6 +151,16 @@
             {Gambar dokumentasi\\belum tersedia};
     \end{tikzpicture}}}
 
+% Helper opsional untuk isi dokumentasi.
+% \gbr{nama-file}{caption}: gambar dari aset/gambar/<nama-file>.png beserta caption
+\newcommand{\gbr}[2]{%
+  \begin{figure}[H]\centering
+    \gambarpengganti{aset/gambar/#1.png}
+    \caption{#2}
+  \end{figure}}
+% \topik{judul}: subjudul tebal kecil di dalam langkah
+\newcommand{\topik}[1]{\par\vspace{8pt}{\bfseries #1}\par\vspace{2pt}}
+
 \begin{document}
 \pagenumbering{arabic}\setcounter{page}{0}
 
@@ -176,8 +186,8 @@
         {\fontsize{18.5}{21}\selectfont Laporan Praktikum/Lab};
   % banner judul (Word TitleCover: Bernard MT Condensed 24pt Bold)
   \fill[abubanner] (15.1,236.7) rectangle (479.7,333.9);
-  \node[anchor=center,inner sep=0,align=center] at (249,287.6)
-        {\bernard\bfseries\fontsize{24}{28}\selectfont\judul};
+  \node[anchor=center,inner sep=0,align=center,font=\bernard\bfseries\fontsize{24}{28}\selectfont] at (249,287.6)
+        {\judul};
   % identitas (rata kanan, Word: Garamond 14pt Bold)
   \node[anchor=north east,inner sep=0,align=right,font=\bfseries\fontsize{14}{15.6}\selectfont] at (449.2,379.2)
         {\namapeserta\\ \kelas\\ \nim};
@@ -203,13 +213,17 @@
     shift={(current page.north west)},x=0.354mm,y=-0.354mm]
   \node[anchor=north,inner sep=0,align=center,text=abujudul,font=\fontsize{9.4}{16.6}\selectfont\addfontfeatures{LetterSpace=14.5}] at (248.6,139.6)
     {FAKULTAS TEKNOLOGI INDUSTRI\\ ITERA 2026};
-  \node[anchor=north,inner sep=0,text=abujudul] at (251.8,206.2)
-    {\arialblack\fontsize{23.5}{27}\selectfont\addfontfeatures{LetterSpace=-7}\judul};
-  \draw[abujudul,line width=0.6pt] (70,243.6) -- (426.4,243.6);
+  % judul boleh dipecah dengan \\; garis bawah ikut turun mengikuti baris terakhir
+  \node[name=jd,anchor=north,inner sep=0,align=center,text=abujudul,font=\arialblack\fontsize{23.5}{27}\selectfont\addfontfeatures{LetterSpace=-7}] at (251.8,206.2)
+    {\judul\rule[-8pt]{0pt}{8pt}};
+  \draw[abujudul,line width=0.6pt] (70,0 |- jd.south) ++(0,12.44) -- ++(356.4,0);
   % anggota kelompok (Word ReturnAddress: Garamond Bold), tumbuh ke atas
+  % kosongkan \daftaranggota untuk laporan individu agar blok ini tidak tampil
+  \ifx\daftaranggota\empty\else
   \node[anchor=south,inner sep=0,align=center,font=\bfseries\fontsize{9.6}{11.2}\selectfont] at (249,527)
     {Nama anggota kelompok:\\\daftaranggota
      \ifx\catatananggota\empty\else\\[6pt]\catatananggota\fi};
+  \fi
   % alamat institusi (Word ReturnAddress: Garamond)
   \node[anchor=north,inner sep=0,align=center,font=\fontsize{9.6}{11.2}\selectfont] at (249,541.3)
     {ITERA Laboratory\\ Program Studi Teknik Informatika\\
