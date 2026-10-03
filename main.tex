@@ -49,6 +49,7 @@
 % ---------- Warna ----------
 \definecolor{abuabu}{HTML}{D6D6D6}    % kotak judul sampul
 \definecolor{abubanner}{HTML}{EAEAEA}  % banner judul sampul
+\definecolor{abujudul}{HTML}{959595}   % teks & garis halaman judul dalam
 \definecolor{abugelap}{HTML}{808080}
 \definecolor{tabhead}{HTML}{4F81BD}   % header tabel
 \definecolor{tabband}{HTML}{DBE5F1}   % baris selang-seling
@@ -200,11 +201,11 @@
 \thispagestyle{halamandua}
 {\linespread{1}\selectfont\begin{tikzpicture}[remember picture,overlay,
     shift={(current page.north west)},x=0.354mm,y=-0.354mm]
-  \node[anchor=north,inner sep=0,align=center,text=abugelap!60,font=\fontsize{9.4}{16.6}\selectfont\addfontfeatures{LetterSpace=14.5}] at (248.6,139.6)
+  \node[anchor=north,inner sep=0,align=center,text=abujudul,font=\fontsize{9.4}{16.6}\selectfont\addfontfeatures{LetterSpace=14.5}] at (248.6,139.6)
     {FAKULTAS TEKNOLOGI INDUSTRI\\ ITERA 2026};
-  \node[anchor=north,inner sep=0,text=abugelap!85] at (251.8,206.2)
+  \node[anchor=north,inner sep=0,text=abujudul] at (251.8,206.2)
     {\arialblack\fontsize{23.5}{27}\selectfont\addfontfeatures{LetterSpace=-7}\judul};
-  \draw[abugelap,line width=0.6pt] (70,243.6) -- (426.4,243.6);
+  \draw[abujudul,line width=0.6pt] (70,243.6) -- (426.4,243.6);
   % anggota kelompok (Word ReturnAddress: Garamond Bold), tumbuh ke atas
   \node[anchor=south,inner sep=0,align=center,font=\bfseries\fontsize{9.6}{11.2}\selectfont] at (249,527)
     {Nama anggota kelompok:\\\daftaranggota
