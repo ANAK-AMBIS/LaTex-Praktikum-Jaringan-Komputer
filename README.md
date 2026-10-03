@@ -1,77 +1,121 @@
-# LaTeX Praktikum Jaringan Komputer IF25-21008
+# Template LaTeX Laporan Praktikum Jaringan Komputer (IF25-21008)
 
-Template LaTeX 1:1 dari `Template Laporan Praktikum Jarkom IF25-21008 (2026).docx`.
+Template LaTeX untuk laporan praktikum **Jaringan Komputer IF25-21008**, Program Studi Teknik Informatika, Institut Teknologi Sumatera (ITERA).
+
+Template ini dibuat semirip mungkin dengan berkas resmi `Template Laporan Praktikum Jarkom IF25-21008 (2026).docx`. Tata letak, ukuran font, warna, dan posisi setiap elemen diukur langsung dari hasil render dokumen Word, lalu disamakan hingga selisihnya hanya beberapa piksel.
 
 ## Daftar Isi
 
+- [Kontributor](#kontributor)
+- [Cara Memakai](#cara-memakai)
 - [Kompilasi](#kompilasi)
 - [Font](#font)
 - [Struktur Proyek](#struktur-proyek)
+- [Catatan](#catatan)
+
+## Kontributor
+
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/hanungdata-prog">
+        <img src="https://github.com/hanungdata-prog.png" width="90" alt="Hanung Akbar Pramusintho"><br>
+        <b>Hanung Akbar Pramusintho</b>
+      </a><br>
+      <sub>Penggagas proyek</sub>
+    </td>
+    <td align="center">
+      <a href="https://github.com/Jeremi16">
+        <img src="https://github.com/Jeremi16.png" width="90" alt="Jeremi Pison Efrat Sianturi"><br>
+        <b>Jeremi Pison Efrat Sianturi</b>
+      </a><br>
+      <sub>Pengembang lanjutan &amp; penyempurnaan tampilan</sub>
+    </td>
+  </tr>
+</table>
+
+- **Hanung Akbar Pramusintho** ([@hanungdata-prog](https://github.com/hanungdata-prog)) mencetuskan ide membuat versi LaTeX dari template laporan resmi.
+- **Jeremi Pison Efrat Sianturi** ([@Jeremi16](https://github.com/Jeremi16)) melanjutkan pengembangannya dan menyempurnakan tampilan sampul, halaman judul, header, kotak rangkuman, hingga warna, sampai identik dengan template Word.
+
+## Cara Memakai
+
+Semua data laporan dipisah ke folder `data/`, jadi `main.tex` tidak perlu disentuh.
+
+| Berkas | Yang diisi |
+|---|---|
+| `data/laporan.tex` | Nomor pertemuan, judul praktikum, bulan dan tahun |
+| `data/identitas.tex` | Nama dan NIM peserta |
+| `data/kelas.tex` | Kelas (RA–RH) |
+| `data/asisten.tex` | Nama dua asisten praktikum |
+| `data/anggota-kelompok.tex` | Daftar anggota kelompok dan catatan di bawahnya |
+
+Isi laporan ditulis di folder `isi/`: rangkuman, langkah-langkah dokumentasi, alat dan bahan, tugas, serta referensi.
+
+> **Tips:** daftar anggota tumbuh ke atas, sehingga alamat ITERA di halaman judul dalam tetap di posisinya berapa pun jumlah anggota. Untuk tugas individu, kosongkan `\catatananggota` agar catatannya tidak tampil.
 
 ## Kompilasi
 
-Gunakan **XeLaTeX** (MiKTeX di Windows). Contoh di bawah memakai PowerShell.
+Template ini wajib dikompilasi dengan **XeLaTeX** (misalnya lewat MiKTeX di Windows).
 
-**Opsi 1: manual (jalankan 2x agar daftar isi dan referensi terbarui)**
+**Cara 1: manual.** Jalankan dua kali agar penomoran halaman dan referensi benar.
 
-```powershell
-$xe = "C:\Users\Jeremi\AppData\Local\Programs\MiKTeX\miktex\bin\x64\xelatex.exe"
-& $xe -interaction=nonstopmode main.tex
-& $xe -interaction=nonstopmode main.tex
+```bash
+xelatex main.tex
+xelatex main.tex
 ```
 
-**Opsi 2: sekali perintah dengan `latexmk`**
+**Cara 2: sekali perintah dengan `latexmk`.**
 
-```powershell
-& "C:\Users\Jeremi\AppData\Local\Programs\MiKTeX\miktex\bin\x64\latexmk.exe" -xelatex -pdf -interaction=nonstopmode main.tex
+```bash
+latexmk -xelatex main.tex
 ```
 
-**Opsi 3: auto-recompile setiap file disimpan**
+**Cara 3: kompilasi otomatis setiap kali berkas disimpan.**
 
-```powershell
-& "C:\Users\Jeremi\AppData\Local\Programs\MiKTeX\miktex\bin\x64\latexmk.exe" -xelatex -pdf -pvc -interaction=nonstopmode main.tex
+```bash
+latexmk -xelatex -pvc main.tex
 ```
 
 ## Font
 
-Template memakai font bawaan Windows, sesuai dokumen `.docx` aslinya:
+Template memakai font bawaan Windows, sama seperti dokumen Word aslinya:
 
 - Garamond
-- Arial Black
-- Arial
+- Arial dan Arial Black
 - Bernard MT Condensed
 - Cambria
 
-Cek ketersediaan font di MiKTeX:
+Cek ketersediaan font di MiKTeX (PowerShell):
 
 ```powershell
 miktex-fc-list | Select-String "Garamond|Arial Black|Bernard|Cambria"
 ```
 
-> ⚠️ **Overleaf / Linux:** font-font di atas tidak tersedia. Install `EB Garamond` dan sesuaikan `\setmainfont` bila perlu.
+> ⚠️ **Overleaf / Linux:** font di atas umumnya tidak tersedia. Pasang `EB Garamond` dan sesuaikan `\setmainfont` di `main.tex`.
 
-### Pemetaan ukuran dan font
+### Ringkasan font dan ukuran
 
 | Bagian | Font dan ukuran |
 |---|---|
-| Isi (body) | Garamond 12 pt |
-| Caption dan tabel | 8 pt |
-| Referensi (daftar pustaka) | 11 pt |
-| Cover | Cambria 14 pt; Arial Black 10 pt dan 52 pt; Garamond 10 pt Bold; Garamond 20 pt; Bernard 24 pt Bold; Garamond 14 pt Bold |
-| Judul halaman dalam | 36 pt |
-| Anggota | 10 pt Bold |
-| Rangkuman | Arial 12 pt |
-| Judul Alat dan Tugas | Garamond 20 pt Bold |
-| Judul Referensi | Arial Black 15 pt |
-| Header dan footer | Arial Black 7 pt / 8 pt |
+| Isi laporan | Garamond 12 pt, spasi 1,5 |
+| Caption gambar dan tabel | Garamond 8 pt |
+| Header | Arial Black 7 pt (kiri, berjarak huruf) dan 8 pt (kanan), garis ganda |
+| Sampul | Cambria 14 pt, Garamond 12,3 / 18,5 / 14 pt, Bernard MT Condensed 24 pt, Arial Black 10 dan 52 pt |
+| Halaman judul dalam | Arial Black 23,5 pt abu-abu `#959595`, anggota dan alamat Garamond 9,6 pt |
+| Kotak rangkuman | Arial Bold Italic 12 dan 10 pt, isi Garamond 9,6 pt |
+| Judul bagian | Garamond 20 pt Bold |
+| Judul referensi | Arial Black 15 pt |
 
 ## Struktur Proyek
 
 | Path | Isi |
 |---|---|
-| `main.tex` | Cover, halaman dalam, header/footer, dan paket |
-| `data/` | Identitas, kelas, asisten, anggota, dan laporan (pertemuan, judul, bulan) |
+| `main.tex` | Pengaturan halaman, font, warna, header/footer, sampul, dan halaman judul dalam |
+| `data/` | Data laporan yang perlu diisi |
 | `isi/` | Rangkuman, `dokumentasi/langkah-1..3`, alat dan bahan, tugas, referensi |
-| `aset/gambar/logotera.png` | Logo yang dipakai (salinan `logotera.png` di root tidak dipakai) |
+| `aset/gambar/` | Logo ITERA, FTI, dan Teknik Informatika, serta contoh gambar dokumentasi |
 
-**Catatan gambar:** gambar dokumentasi memakai fallback `\gambarpengganti`. Jika file gambar tidak ada, akan tampil kotak bertuliskan "belum tersedia".
+## Catatan
+
+- Gambar dokumentasi memakai perintah `\gambarpengganti`. Jika berkas gambarnya belum ada, yang tampil adalah kotak bertuliskan "Gambar dokumentasi belum tersedia", sehingga kompilasi tidak gagal.
+- Pada `isi/dokumentasi/langkah-2.tex` ada `\newpage` agar langkah kedua dimulai di halaman baru seperti di template Word. Hapus baris itu jika tidak diperlukan.
